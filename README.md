@@ -1,7 +1,7 @@
 # RoWordNet
 
-**RoWordNet stand for Romanian WordNet, a semantic network for the Romanian language**. RoWordNet mimics Princeton WordNet, a large lexical database of English. 
-The building block of a WordNet is the **synset** that expresses a unique concept. The synset (a synonym set) contains, as the name implies, a number of synonym words known as literals. The synset has more properties like a definition and links to other synsets. They also have a part-of-speech (pos) that groups them in four categories: nouns, verbs, adverbs and adjectives. Synsets are interlinked by **semantic relations** like hypernymy ("is-a"), meronymy ("is-part"), antonymy, and others. 
+**RoWordNet stands for Romanian WordNet, a semantic network for the Romanian language**. RoWordNet mimics Princeton WordNet, a large lexical database of English. 
+The building block of a WordNet is the **synset**, which expresses a unique concept. The synset (a synonym set) contains, as the name implies, a number of synonym words known as literals. The synset has more properties, such as a definition, and links to other synsets. They also have a part of speech (pos) that groups them in four categories: nouns, verbs, adverbs and adjectives. Synsets are interlinked by **semantic relations** like hypernymy ("is-a"), meronymy ("is-part"), antonymy, and others. 
 
 ## Install
 
@@ -23,7 +23,7 @@ A **synset** has the following data, accessed as properties (others are present,
 * pos : the part of speech of this synset (enum: Synset.Pos.NOUN, VERB, ADVERB, ADJECTIVE)
 * sentiwn : a three-valued list indicating the SentiWN PNO (Positive, Negative, Objective) of this synset.
 
-**Relations** are edges between synsets. Examples on how to list inbound/outbound relations given a synset and other graph operations are given in examples below.
+**Relations** are edges between synsets. Examples on how to list inbound/outbound relations given a synset and other graph operations are given below.
 
 ____
 
@@ -51,7 +51,7 @@ synset_ids = wn.synsets(literal=word)
 ```
 Eash synset has a unique ID, and most operations work with IDs. Here, ``wn.synsets(word)`` returns a list of synsets that contain word 'arbore' or an empty list if the word is not found. 
 
-Please note that the Romanian WordNet also contains words (literals) that are actually expressions like "tren\_de\_marfă", and searching for "tren" will also find this synset.
+Please note that the Romanian WordNet also contains words (literals) that are actually expressions like "tren\_de\_marfă", and searching for "tren" will also find such synsets.
 
 ### Get a synset
 
@@ -106,7 +106,7 @@ Synset(id='ENG30-02376918-n', literals=['cal'], definition='Masculul speciei Equ
 
 ### Relations access
 
-Synsets are linked by relations (encoded as directed edges in a graph). A synset usually has outbound as well as inbound relation, To obtain the outbound relations of a synset use ``wn.outbound_relations()`` with the synset id as parameter. The result is a list of tuples like ``(synset_id, relation)`` encoding the target synset and the relation that starts from the current synset (given as parameter) to the target synset.
+Synsets are linked by relations (encoded as directed edges in a graph). A synset usually has outbound as well as inbound relation. To obtain the outbound relations of a synset use ``wn.outbound_relations()`` with the synset id as parameter. The result is a list of tuples like ``(synset_id, relation)`` encoding the target synset and the relation that starts from the current synset (given as parameter) to the target synset.
 
 ```python 
 synset_id = wn.synsets("tren")[2] # select the third synset from all synsets containing word "tren"
@@ -124,7 +124,7 @@ Print all outbound relations of Synset(id='ENG30-04468005-n', literals=['tren'],
     Relation [hyponym] to synset Synset(id='ENG30-03394480-n', literals=['marfar', 'tren_de_marfă'], definition='tren format din vagoane de marfă')
     Relation [member_meronym] to synset Synset(id='ENG30-03684823-n', literals=['locomotivă', 'mașină'], definition='Vehicul motor de cale ferată, cu sursă de energie proprie sau străină, folosind pentru a remorca și a deplasa vagoanele.')
 ````
-This means that from the current synset there are three relations pointing to other synsets: the first relation means that "tren" is-a (hypernym) "transport\_public"; the second relation is a hyponym, meaning that "marfar" is-a "tren"; the third member_meronym relation meaning that "locomotiva" is a part-of "tren".
+This means that from the current synset there are three relations pointing to other synsets: the first relation means that "tren" is-a "transport\_public" (hypernym); the second relation is a hyponym, meaning that "marfar" is-a "tren"; the third member_meronym relation meaning that "locomotiva" is a part-of "tren".
 
 The ``wn.inbound_relations()`` works identically but provides a list of _incoming_ relations to the synset provided as the function parameter, while ``wn.relation()`` provides allboth inbound and outbound relations to/from a synset (note: usually wn.relations() is provided as a convenience and is used for information/printing purposes as the returned tuple list looses directionality)
               
@@ -132,7 +132,7 @@ The ``wn.inbound_relations()`` works identically but provides a list of _incomin
 
 ## Credits
 
-If you decide to use this work in a scientific paper, please consider citing the following paper as a thank you to the authors of the actual Romanian WordNet data:
+If you decide to use this work in a scientific paper, please consider citing the following paper as a thank to the authors of the actual Romanian WordNet data:
 
 ```
 Dan Tufiş, Verginica Barbu Mititelu, The Lexical Ontology for Romanian, in Nuria Gala, Reinhard Rapp, Nuria Bel-Enguix (Ed.), Language Production, Cognition, and the Lexicon, series Text, Speech and Language Technology, vol. 48, Springer, 2014, p. 491-504.
